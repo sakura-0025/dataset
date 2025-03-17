@@ -1,4 +1,3 @@
-% 投稿文章的 TeX 模板（含引用部分）
 \documentclass[12pt]{article}
 \usepackage{graphicx}
 \usepackage{amsmath,amssymb}
@@ -6,7 +5,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{geometry}
 \geometry{a4paper, margin=1in}
-\usepackage{cite} % 管理引用
+\usepackage{cite}
 
 \title{ZheDa DataSet in China}
 \author{Name1, Name2, Name3}
@@ -16,11 +15,57 @@
 \maketitle
 
 \begin{abstract}
-% 在此处填写摘要
+    
 \end{abstract}
 
 \section*{Background \& Summary}
-% 请在此处添加内容。例如：文献\cite{example1}中介绍了相关背景。
+
+The stability and operational efficiency of power systems are crucial for modern energy infrastructure,
+especially in the context of large-scale renewable energy integration and the continuous development of smart grid technologies.
+Understanding the dynamic behavior of power systems, including interactions between different types of nodes, is essential for grid optimization,
+stability analysis, and operational scheduling. However, publicly available datasets that comprehensively reflect the evolving topology and electrical
+characteristics of power networks over time remain limited. To address this gap, we have constructed a time-series dataset that records the topological
+relationships and electrical properties of power system nodes, supporting research in power flow analysis, anomaly detection, and grid resilience assessment.  
+
+This dataset has the following key characteristics:
+
+\begin{itemize}
+    \item \textbf{\small Topological Structure Modeling}: The \texttt{edges} array records the connections between power system nodes, providing a clear representation of the grid topology. This facilitates complex network analysis, fault propagation studies, and network optimization.  
+    \item \textbf{\small Time-Series Electrical Characteristics}: The \texttt{H} matrix contains electrical parameters (e.g., voltage, current, power) for each node at different time points, supporting load analysis, power flow calculations, and time-series studies.  
+    \item \textbf{\small Node Function Classification}: Three types of nodes are identified within the dataset:
+    \begin{itemize}
+        \item \textbf{\small PQ Nodes (Load Nodes)}: Nodes with both active power (P) and reactive power (Q) demands, which are essential for studying power distribution and dynamic load variations.  
+        \item \textbf{\small PV Nodes (Generation Nodes)}: Nodes that provide active power output while maintaining a constant voltage, useful for analyzing generator operations and optimization strategies.  
+        \item \textbf{\small Vt Nodes (Voltage-Controlled Nodes)}: Typically representing critical substations or power plants responsible for voltage stability, these nodes are valuable for studying grid regulation and control strategies.  
+    \end{itemize}
+    \item \textbf{\small Temporal Data Features}: The inclusion of time-series data enables dynamic grid analysis, such as short-term load forecasting, stability assessment, and anomaly detection, rather than being limited to static power flow calculations.  
+    \item \textbf{\small Wide Applicability}: The dataset can be used in machine learning, deep learning, optimization algorithm testing, power grid fault prediction, power quality analysis, and smart grid control strategy research.  
+\end{itemize}
+
+The time-series nature of this dataset makes it suitable for a wide range of research applications,
+including machine learning-based power system forecasting, stability assessment, and anomaly detection.
+Additionally, it serves as a benchmark for optimization and control algorithm testing, contributing to the development of intelligent scheduling methods.
+Unlike traditional static datasets, which typically provide only snapshots of power system states at specific moments, this dataset captures the dynamic evolution of
+the grid, allowing researchers to analyze both long-term trends and short-term fluctuations. The improved temporal resolution enhances its applicability to real-world
+power system analysis.  
+
+Several datasets, such as IEEE test systems and open-source grid models, have been widely used in power system research. 
+However, these datasets primarily focus on steady-state analysis and lack representations of dynamic system behavior. Additionally, 
+while frameworks like MATPOWER provide computational tools for power flow analysis, they do not inherently include real-world time-series data for model validation.
+ In contrast, our dataset fills this gap by offering structured time-series data, expanding the possibilities for computational experiments and analytical studies.  
+
+This dataset holds significant reuse potential across multiple domains:
+
+\begin{itemize}
+    \item \textbf{\small Power Grid Stability and Security Analysis}: Supports the assessment of grid operational states and stability under varying load conditions and fault scenarios.  
+    \item \textbf{\small Smart Grid Optimization and Scheduling}: Enables research on real-time grid optimization and scheduling, improving energy efficiency and reducing operational costs.  
+    \item \textbf{\small Data-Driven Predictive Models}: Suitable for training and validating machine learning and deep learning models for tasks such as load forecasting and anomaly detection.  
+    \item \textbf{\small Interdisciplinary Research}: Can be integrated with economic and market factors to study the financial impact of grid anomalies and optimize energy management strategies for economic benefits.  
+\end{itemize}
+
+Overall, this dataset provides a comprehensive, high-resolution representation of power system node interactions,
+creating new research opportunities in grid modeling, machine learning applications, and energy system optimization.
+By making this dataset publicly available, we aim to promote reproducible research and accelerate advancements in power system management and analysis.
 
 \section*{Methods}
 \subsection*{Data collection}
@@ -41,7 +86,6 @@
 
 \subsection*{Correlation analysis}
 % 相关性分析说明
-111\cite{example1}
 \subsection*{Load curve}
 % 负荷曲线说明
 
@@ -51,7 +95,6 @@
 \section*{Acknowledgements}
 % 致谢内容
 
-\section*{References}
 % 请在此处插入引用，可以采用 BibTeX 或手动添加参考文献。
 \bibliographystyle{unsrt}  % 可选 plain、alpha、abbrv 等格式
 \bibliography{references}  % 请确保有一个名为 references.bib 的 BibTeX 数据库文件

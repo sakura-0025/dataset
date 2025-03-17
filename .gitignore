@@ -1,0 +1,49 @@
+# LaTeX 编译中间文件
+*.aux
+*.bbl
+*.blg
+*.brf
+*.dvi
+*.fls
+*.fdb_latexmk
+*.glg
+*.glo
+*.gls
+*.idx
+*.ilg
+*.ind
+*.lof
+*.lot
+*.nav
+*.out
+*.snm
+*.synctex.gz
+*.toc
+*.vrb
+*.xdv
+*.log
+
+# 可能的临时文件
+*.acn
+*.acr
+*.alg
+*.glsdefs
+*.ist
+*.maf
+*.mtc*
+*.run.xml
+
+# PDFLaTeX / XeLaTeX / LuaLaTeX 产生的 PDF 输出
+*.pdf
+
+# TeXShop（macOS 下的 LaTeX 编辑器）相关文件
+*.synctex
+*.backup
+*.texshop
+
+# VSCode 和其他编辑器的临时文件
+.vscode/
+*.swp
+*.swo
+*.bak
+*~
