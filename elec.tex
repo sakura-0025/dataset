@@ -1,0 +1,60 @@
+% 投稿文章的 TeX 模板（含引用部分）
+\documentclass[12pt]{article}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+\usepackage{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
+\usepackage{cite} % 管理引用
+
+\title{ZheDa DataSet in China}
+\author{Name1, Name2, Name3}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+% 在此处填写摘要
+\end{abstract}
+
+\section*{Background \& Summary}
+% 请在此处添加内容。例如：文献\cite{example1}中介绍了相关背景。
+
+\section*{Methods}
+\subsection*{Data collection}
+% 数据采集内容
+
+\subsection*{Data processing}
+% 数据处理内容
+
+\section*{Data Records}
+% 数据记录说明
+
+\section*{Technical Validation}
+\subsection*{Missing value imputation}
+% 缺失值填补说明
+
+\subsection*{Fault value diagnosis}
+% 故障值诊断说明
+
+\subsection*{Correlation analysis}
+% 相关性分析说明
+111\cite{example1}
+\subsection*{Load curve}
+% 负荷曲线说明
+
+\section*{Usage Notes}
+% 使用说明
+
+\section*{Acknowledgements}
+% 致谢内容
+
+\section*{References}
+% 请在此处插入引用，可以采用 BibTeX 或手动添加参考文献。
+\bibliographystyle{unsrt}  % 可选 plain、alpha、abbrv 等格式
+\bibliography{references}  % 请确保有一个名为 references.bib 的 BibTeX 数据库文件
+
+
+\end{document}
