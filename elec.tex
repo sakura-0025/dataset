@@ -6,6 +6,7 @@
 \usepackage{hyperref}
 \usepackage[utf8]{inputenc}
 \usepackage{geometry}
+\usepackage{booktabs}
 \geometry{a4paper, margin=1in}
 \usepackage{cite}
 
@@ -73,6 +74,8 @@ By making this dataset publicly available, we aim to promote reproducible resear
 \subsection*{Data collection}
 % 数据采集内容
 
+
+
 \subsection*{Data processing}
 % 数据处理内容
 During the data acquisition process, several files are missing, leading to gaps in the data for \emph{PQ\_nodes}, \emph{PV\_nodes}, \emph{voltage\_profile},\emph{admittance matrix} ,\emph{edges}. These missing files are recorded in a list (e.g., \texttt{missing\_files.txt}), indicating that for certain timestamps, the corresponding data is absent.
@@ -120,6 +123,92 @@ Figure~\ref{fig:Avg_Magnitude} illustrates the variation in the average magnitud
 
 \section*{Data Records}
 
+This dataset comprises \textbf{time-series weather data} and \textbf{power grid data}, collected at an \textbf{hourly resolution}. The dataset is structured into two key components:
+\begin{itemize}
+    \item \textbf{Weather Data}: Records environmental variables essential for energy-related applications.
+    \item \textbf{Power Grid Data}: Captures grid topology, node attributes, power flow, and voltage information.
+\end{itemize}
+Each data file is stored in \textbf{NPZ format}, with the following naming convention: \texttt{YYYYMMDD\_HHMM.npz} (e.g., \texttt{20241020\_0000.npz} represents October 20, 2024, at 00:00).
+
+\subsection*{Weather Data}
+The weather dataset consists of six features, with each record representing an hourly snapshot of atmospheric conditions. Table \ref{tab:weather} summarizes these features.
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{ll}
+        \toprule
+        \textbf{Feature} & \textbf{Description} \\
+        \midrule
+        \textbf{Date}  & Timestamp (YYYY-MM-DD HH:MM:SS) \\
+        \textbf{hgv}   & Horizontal global irradiance (W/m²) \\
+        \textbf{htv}   & Tilted surface irradiance (W/m²) \\
+        \textbf{tempPv} & PV module temperature (°C) \\
+        \textbf{windSpeed} & Wind speed (m/s) \\
+        \textbf{windDir} & Wind direction (degrees) \\
+        \bottomrule
+    \end{tabular}
+    \caption{Summary of Weather Data Features}
+    \label{tab:weather}
+\end{table}
+
+These parameters are crucial for assessing \textbf{solar energy potential, weather-driven power fluctuations, and energy system performance}.
+
+\subsection*{Power Grid Data}
+The power grid dataset contains \textbf{structural and operational} information, enabling detailed analysis of electrical network behavior.
+
+\subsubsection*{Node Attributes}
+Each node in the power grid is classified into one of the following types:
+\begin{itemize}
+    \item \textbf{Load node}: Represents a consumption point within the grid.
+    \item \textbf{Generator node}: Corresponds to a power generation source.
+    \item \textbf{Balance node}: Ensures power equilibrium in the system.
+\end{itemize}
+The dataset also includes a \textbf{connectivity matrix}, representing the grid structure and interconnections between nodes.
+
+\subsubsection*{Power and Voltage Features}
+\begin{table}[h]
+    \centering
+    \begin{tabular}{ll}
+        \toprule
+        \textbf{Feature} & \textbf{Description} \\
+        \midrule
+        \textbf{P\_load} & Active power load at each node (MW) \\
+        \textbf{Q\_load} & Reactive power load at each node (MVAR) \\
+        \textbf{P\_gen} & Active power generation at each generator node (MW) \\
+        \textbf{Q\_gen} & Reactive power generation at each generator node (MVAR) \\
+        \textbf{Voltage Phase Angle (\(\theta\))} & Voltage phase angle at each node (degrees) \\
+        \bottomrule
+    \end{tabular}
+    \caption{Summary of Power Grid Data Features}
+    \label{tab:grid}
+\end{table}
+
+These parameters are vital for \textbf{grid stability analysis, load forecasting, and power distribution optimization}.
+
+\subsection*{Data Storage \& Accessibility}
+\begin{itemize}
+    \item \textbf{Frequency}: Data is recorded hourly (\textbf{1-hour intervals}).
+    \item \textbf{File Format}: NPZ (NumPy compressed archive).
+    \item \textbf{File Naming Convention}: \texttt{YYYYMMDD\_HHMM.npz} (e.g., \texttt{20241020\_0000.npz}).
+\end{itemize}
+Each NPZ file contains structured arrays for easy data retrieval:
+
+\begin{verbatim}
+{
+    "weather": np.array([...]),  # Shape: (N, 6) [hgv, htv, tempPv, windSpeed, windDir]
+    "grid": {
+        "connectivity": np.array([...]),  # Grid adjacency matrix or edge list
+        "node_types": np.array([...]),  # Labels indicating node types
+        "P_load": np.array([...]),  # Active power load
+        "Q_load": np.array([...]),  # Reactive power load
+        "P_gen": np.array([...]),  # Active power generation
+        "Q_gen": np.array([...]),  # Reactive power generation
+        "voltage_angle": np.array([...])  # Voltage phase angle
+    }
+}
+\end{verbatim}
+
+This dataset is well-suited for research in \textbf{renewable energy integration, power system optimization, and data-driven energy forecasting}.
 
 
 \section*{Technical Validation}
