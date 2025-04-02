@@ -74,8 +74,12 @@ By making this dataset publicly available, we aim to promote reproducible resear
 \subsection*{Data collection}
 % 数据采集内容
 
+The data is collected from the power grid of a certain area in eastern China by the D5000 system of the State Grid Corporation of China.
+Data collection is primarily implemented through various sensor devices. 
+After preliminary local processing, the collected data is transmitted to the system for comprehensive analysis and processing via communication networks. Typically, the data acquisition and communication subsystem in the system consists of routers, data acquisition communication servers, and serial communication devices. The normal functioning of these related equipment requires two or more application servers to provide functional support and mutual backup redundancy.
 
-
+The dataset covers a time span from 00:00 on October 20, 2024, to 23:00 on November 25, 2024. 
+The power system automatically collects relevant grid data every hour, while weather data is also gathered hourly by on-site installed meteorological stations.
 \subsection*{Data processing}
 % 数据处理内容
 During the data acquisition process, several files are missing, leading to gaps in the data for \emph{PQ\_nodes}, \emph{PV\_nodes}, \emph{voltage\_profile},\emph{admittance matrix},\emph{edges}. These missing files are recorded in a list (e.g., \texttt{missing\_files.txt}), indicating that for certain timestamps, the corresponding data is absent.
