@@ -82,7 +82,7 @@ The dataset covers a time span from 00:00 on October 20, 2024, to 23:00 on Novem
 The power system automatically collects relevant grid data every hour, while weather data is also gathered hourly by on-site installed meteorological stations.
 \subsection*{Data processing}
 % 数据处理内容
-During the data acquisition process, several files are missing, leading to gaps in the data for \emph{PQ\_nodes}, \emph{PV\_nodes}, \emph{voltage\_profile},\emph{admittance matrix},\emph{edges}. These missing files are recorded in a list (e.g., \texttt{missing\_files.txt}), indicating that for certain timestamps, the corresponding data is absent.
+During the data acquisition process, several files are missing, leading to gaps in the data for \emph{PQ\_nodes}, \emph{PV\_nodes}, \emph{voltage\_profile},\emph{H matrix},\emph{edges}. These missing files are recorded in a list (e.g., \texttt{missing\_files.txt}), indicating that for certain timestamps, the corresponding data is absent.
 
 To address the issue, we utilize adjacent available data within a window of one day (or more, if needed) to complete the missing information. For the \emph{PQ\_nodes}, \emph{PV\_nodes}, and \emph{voltage\_profile}, a majority-vote strategy is applied by stacking the available data from nearby timestamps and determining the estimated value at each node based on whether the sum exceeds half the number of available samples. For the \emph{edges} field, a union of all edges from the adjacent available files is taken to reconstruct the missing edge information.
 
@@ -112,11 +112,11 @@ This method leverages temporal continuity by using information from proximate ti
 
 As shown in Figure\ref{fig:PQ_nodes}, Figure\ref{fig:PV_nodes} and Figure\ref{fig:voltage_profile}, the respective data processing results are clearly visualized.
 
-For the \emph{admittance matrix} field, we employ \emph{cubic spline interpolation} to estimate the missing values in the admittance matrix. Specifically, we first sort the available data by their timestamps and, for each element of the matrix, build a cubic spline model using the existing time-series data. This model is then used to interpolate the matrix values at the missing (target) timestamps.
+For the \emph{H matrix} field, we employ \emph{cubic spline interpolation} to estimate the missing values in the H matrix. Specifically, we first sort the available data by their timestamps and, for each element of the matrix, build a cubic spline model using the existing time-series data. This model is then used to interpolate the matrix values at the missing (target) timestamps.
 
-Cubic spline interpolation provides a smooth and continuous estimation compared to linear methods. It is more capable of capturing nonlinear trends and ensures higher-order continuity, thus yielding a more accurate reconstruction of the underlying admittance properties.
+Cubic spline interpolation provides a smooth and continuous estimation compared to linear methods. It is more capable of capturing nonlinear trends and ensures higher-order continuity, thus yielding a more accurate reconstruction of the underlying H properties.
 
-Figure~\ref{fig:Avg_Magnitude} illustrates the variation in the average magnitude of the admittance matrix over time. 
+Figure~\ref{fig:Avg_Magnitude} illustrates the variation in the average magnitude of the H matrix over time. 
 
 \begin{figure}[H]
     \centering
