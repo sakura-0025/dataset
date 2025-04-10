@@ -112,9 +112,9 @@ This method leverages temporal continuity by using information from proximate ti
 
 As shown in Figure\ref{fig:PQ_nodes}, Figure\ref{fig:PV_nodes} and Figure\ref{fig:voltage_profile}, the respective data processing results are clearly visualized.
 
-For the \emph{H matrix} field, we employ \emph{cubic spline interpolation} to estimate the missing values in the H matrix. Specifically, we first sort the available data by their timestamps and, for each element of the matrix, build a cubic spline model using the existing time-series data. This model is then used to interpolate the matrix values at the missing (target) timestamps.
+For the \emph{H matrix} field, we employ \emph{linear interpolation} to estimate the missing values in the H matrix. Specifically, we first sort the available data by their timestamps and, for each element of the matrix, apply linear interpolation using the existing time-series data. This method is then used to interpolate the matrix values at the missing (target) timestamps.
 
-Cubic spline interpolation provides a smooth and continuous estimation compared to linear methods. It is more capable of capturing nonlinear trends and ensures higher-order continuity, thus yielding a more accurate reconstruction of the underlying H properties.
+Linear interpolation provides a straightforward and efficient estimation approach. It is particularly suitable for power system data where changes often follow relatively simple patterns between consecutive time points, thus yielding a reliable reconstruction of the underlying H properties with minimal computational complexity.
 
 Figure~\ref{fig:Avg_Magnitude} illustrates the variation in the average magnitude of the H matrix over time. 
 
@@ -218,6 +218,29 @@ This dataset is well-suited for research in \textbf{renewable energy integration
 \section*{Technical Validation}
 \subsection*{Missing value imputation}
 % 缺失值填补说明
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.85\textwidth]{picture/interpolation.png}
+    \caption{Comparison of Linear and Cubic Spline Interpolation Methods}
+    \label{fig:interpolation_comparison_en}
+\end{figure}
+
+\begin{table}[htbp]
+    \centering
+    
+    \label{tab:interpolation_errors_en}
+    \begin{tabular}{lccc}
+        \toprule
+        \textbf{Method} & \textbf{MSE} & \textbf{RMSE} & \textbf{MAE} \\
+        \midrule
+        Linear Interpolation & $5.6 \times 10^{-5}$ & $7.468 \times 10^{-3}$ & $5.770 \times 10^{-3}$ \\
+        Cubic Spline Interpolation & $2.329 \times 10^{-3}$ & $4.826 \times 10^{-2}$ & $4.457 \times 10^{-2}$ \\
+        \bottomrule
+    \end{tabular}
+    \caption{Error Metrics Comparison of Interpolation Methods}
+\end{table}
+
+For filling missing values in power system H matrices, we compared linear interpolation and cubic spline interpolation methods. As shown in Figure~\ref{fig:interpolation_comparison_en}, linear interpolation (blue line) demonstrated better performance than cubic spline interpolation (red line) on this dataset. The error metrics in Table~\ref{tab:interpolation_errors_en} clearly indicate that linear interpolation outperforms cubic spline interpolation in terms of MSE, RMSE, and MAE, with an MSE value approximately 1/41 of that of cubic spline interpolation. This may be due to the power system data exhibiting more linear temporal characteristics or containing certain noise patterns, which cubic spline interpolation tends to overfit. For this type of power system data, linear interpolation provides more accurate estimation results due to its simplicity and robustness.
 
 \subsection*{Fault value diagnosis}
 % 故障值诊断说明
