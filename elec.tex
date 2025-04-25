@@ -96,21 +96,8 @@ This method leverages temporal continuity by using information from proximate ti
 \label{fig:PQ_nodes}
 \end{figure}
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.7\textwidth]{picture/PV_nodes.png}
-    \caption{PV\_nodes}
-\label{fig:PV_nodes}
-\end{figure}
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.7\textwidth]{picture/voltage_profile.png}
-    \caption{voltage\_profile}
-\label{fig:voltage_profile}
-\end{figure}
-
-As shown in Figure\ref{fig:PQ_nodes}, Figure\ref{fig:PV_nodes} and Figure\ref{fig:voltage_profile}, the respective data processing results are clearly visualized.
+As shown in Figure\ref{fig:PQ_nodes},the respective data processing results are clearly visualized.
 
 For the \emph{H matrix} field, we employ \emph{linear interpolation} to estimate the missing values in the H matrix. Specifically, we first sort the available data by their timestamps and, for each element of the matrix, apply linear interpolation using the existing time-series data. This method is then used to interpolate the matrix values at the missing (target) timestamps.
 
@@ -242,11 +229,63 @@ This dataset is well-suited for research in \textbf{renewable energy integration
 
 For filling missing values in power system H matrices, we compared linear interpolation and cubic spline interpolation methods. As shown in Figure~\ref{fig:interpolation_comparison_en}, linear interpolation (blue line) demonstrated better performance than cubic spline interpolation (red line) on this dataset. The error metrics in Table~\ref{tab:interpolation_errors_en} clearly indicate that linear interpolation outperforms cubic spline interpolation in terms of MSE, RMSE, and MAE, with an MSE value approximately 1/41 of that of cubic spline interpolation. This may be due to the power system data exhibiting more linear temporal characteristics or containing certain noise patterns, which cubic spline interpolation tends to overfit. For this type of power system data, linear interpolation provides more accurate estimation results due to its simplicity and robustness.
 
-\subsection*{Fault value diagnosis}
-% 故障值诊断说明
 
 \subsection*{Correlation analysis}
 % 相关性分析说明
+
+\subsubsection*{Statistical Correlation Analysis Results}
+
+Statistical analysis of the data,visualized in Table~\ref{tab:correlation}, reveals a significant negative correlation between active power and device temperature:
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=0.85\linewidth]{picture/Active Power and Device Temperature.png}
+    \caption{Time series of active power and device temperature}
+    \label{fig:timeseries}
+\end{figure}
+
+Pearson correlation analysis yielded a coefficient of $-0.6154$, indicating a moderate negative linear relationship between the two variables. The p-value of $3.24 \times 10^{-6}$ is significantly lower than the 0.05 significance level, confirming the statistical significance of this correlation.
+
+Spearman rank correlation analysis produced a coefficient of $-0.6989$, slightly stronger than the Pearson coefficient, suggesting that the monotonic relationship between these variables may be more pronounced than a purely linear relationship. Similarly, the p-value ($3.31 \times 10^{-8}$) is significantly below 0.05, further validating the reliability of this correlation.
+
+\begin{table}[t]
+    \centering
+    \caption{Correlation statistics between active power and device temperature}
+    \label{tab:correlation}
+    \begin{tabular}{lcccc}
+        \toprule
+        \textbf{Correlation Type} & \textbf{Coefficient} & \textbf{p-value} & \textbf{Significance} & \textbf{Strength} \\
+        \midrule
+        Pearson Correlation & $-0.6154$ & $3.24 \times 10^{-6}$ & Significant & Moderate Negative \\
+        Spearman Rank Correlation & $-0.6989$ & $3.31 \times 10^{-8}$ & Significant & Moderate Negative \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\subsubsection*{Time Series Trend Analysis}
+
+The time series data, visualized in Figure~\ref{fig:timeseries}, reveals the following relationship patterns:
+
+Distinct inverse variation: When active power increases, device temperature tends to decrease; conversely, when active power decreases, device temperature rises significantly.
+
+Diurnal cycle variation: The chart displays data over approximately two days, revealing pronounced daily temperature patterns:
+\begin{itemize}
+    \item During midday to afternoon periods (8:00-16:00), temperatures rise to 30-35°C while active power drops to near minimum levels
+    \item During night to early morning periods, temperatures fall to 5-10°C while active power maintains relatively high levels (approximately 1.5-2.0)
+\end{itemize}
+
+Crossover characteristics: The intersection points of the two curves often represent transition phases in the variable relationship, such as those occurring around 8:00 and 20:00.
+
+\subsubsection*{Correlation Relationship Interpretation}
+
+This moderate negative correlation may reflect the following mechanisms:
+
+\textbf{Thermodynamic relationship}: When devices operate under lighter loads (lower power), they may dissipate more energy as heat, leading to temperature increases; conversely, during high-power operation, system efficiency may improve, relatively reducing heat losses.
+
+\textbf{Environmental factor influence}: Increased temperatures may reduce device efficiency, subsequently affecting power output capability, forming a negative feedback mechanism.
+
+\textbf{Operational mode association}: The data may reflect preset operational modes of the device during different periods, which simultaneously influence power output and temperature control systems.
+
 \subsection*{Load curve}
 % 负荷曲线说明
 
