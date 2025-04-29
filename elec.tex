@@ -7,9 +7,8 @@
 \usepackage[utf8]{inputenc}
 \usepackage{geometry}
 \usepackage{booktabs}
-\geometry{a4paper, margin=1in}
 \usepackage{cite}
-
+\geometry{a4paper, margin=1in}
 \title{ZheDa DataSet in China}
 \author{Name1, Name2, Name3}
 \date{\today}
@@ -17,58 +16,77 @@
 \begin{document}
 \maketitle
 
-\begin{abstract}
-    
-\end{abstract}
+\textbf{The increasing integration of renewable energy and smart grid technologies pushes power systems closer to their technical limits, with larger and more frequent fluctuations. This demands real-time, accurate assessments of grid safety and reliability. Although machine learning (ML) offers fast, efficient analysis, its success depends on large, high-quality datasets, which remain scarce—especially those capturing grid topology, electrical characteristics, and weather dynamics. To address this gap, we constructed a time series dataset covering node topology, electrical properties, and synchronized meteorological data from a city in southern China. It supports research in power flow analysis, anomaly detection, and grid resilience, providing a foundation for advancing intelligent energy systems.}
 
 \section*{Background \& Summary}
 
-The stability and operational efficiency of power systems are crucial for modern energy infrastructure,
-especially in the context of large-scale renewable energy integration and the continuous development of smart grid technologies.
-Understanding the dynamic behavior of power systems, including interactions between different types of nodes, is essential for grid optimization,
-stability analysis, and operational scheduling. However, publicly available datasets that comprehensively reflect the evolving topology and electrical
-characteristics of power networks over time remain limited. To address this gap, we have constructed a time-series dataset that records the topological
-relationships and electrical properties of power system nodes, supporting research in power flow analysis, anomaly detection, and grid resilience assessment.  
+In modern energy infrastructure, the stability and operation efficiency of power systems are crucial.
+With the continuous development of large-scale renewable energy grid integration and smart grid technology,
+the operation status of power grids is getting closer to its technical limits and facing larger and more frequent fluctuations\cite{gillioz2025large}.
+This change requires that the assessment of the safety and reliability of power grid operation should not only be more frequent, 
+but also be able to achieve real-time monitoring and continuously improve the accuracy of the assessment. 
+However, this places higher demands on computing power and is becoming increasingly challenging.
 
-This dataset has the following key characteristics:
+Fast, data-based methods, especially Machine Learning (ML) technology, are widely regarded as an effective way to meet this challenge.
+ML methods can output prediction and analysis results in a short time with high learning efficiency, 
+so they have attracted attention\cite{duchesne2020recent,misyris2020physics}.However, at the same time, the performance of ML models is highly dependent 
+on the support of a large amount of high-quality training and test data\cite{stiasny2022closing}. At present, most of the databases of 
+power grids are based on synthetic data\cite{meinecke2020simbench}, and the lack of real power grid operation data resources is still the main obstacle to building 
+machine learning algorithms that can be applied to power system operation and maintenance.
+In particular, the lack of high-temporal and spatial resolution datasets that can fully describe the topology and electrical
+characteristics of the power grid and reflect the local weather evolution process has become a key issue that needs to be broken through.
 
+In response to this situation, we constructed a time series dataset covering the topological relationship,
+electrical characteristics, and synchronously recorded meteorological data of power system nodes in a city in southern China.
+This dataset can support multiple research directions such as power flow analysis, anomaly detection, 
+and grid resilience (elasticity) assessment, providing a data foundation for promoting the intelligent management of
+smart grids and energy systems. We hope that this resource can provide strong support for researchers and engineers in the field 
+of power systems and promote the development and application of related technologies.
+
+
+
+This dataset has the following unique characteristics:
+
+% \begin{itemize}
+%     \item \textbf{\small Topological Structure Modeling}: The \texttt{edges} array records the connections between power system nodes, providing a clear representation of the grid topology. This facilitates complex network analysis, fault propagation studies, and network optimization.  
+%     \item \textbf{\small Time-Series Electrical Characteristics}: The \texttt{H} matrix contains electrical parameters (e.g., voltage, current, power) for each node at different time points, supporting load analysis, power flow calculations, and time-series studies.  
+%     \item \textbf{\small Node Function Classification}: Three types of nodes are identified within the dataset:
+%     \begin{itemize}
+%         \item \textbf{\small PQ Nodes (Load Nodes)}: Nodes with both active power (P) and reactive power (Q) demands, which are essential for studying power distribution and dynamic load variations.  
+%         \item \textbf{\small PV Nodes (Generation Nodes)}: Nodes that provide active power output while maintaining a constant voltage, useful for analyzing generator operations and optimization strategies.  
+%         \item \textbf{\small Vt Nodes (Voltage-Controlled Nodes)}: Typically representing critical substations or power plants responsible for voltage stability, these nodes are valuable for studying grid regulation and control strategies.  
+%     \end{itemize}
+%     \item \textbf{\small Time-Series Weather Data Integration}: The dataset incorporates synchronized local weather measurements (e.g., temperature, humidity, wind speed), allowing users to investigate the influence of environmental conditions on grid behavior. This multimodal temporal data supports weather-aware forecasting, renewable integration studies, and climate resilience analysis.
+%     \item \textbf{\small Wide Applicability}: The dataset can be used in machine learning, deep learning, optimization algorithm testing, power grid fault prediction, power quality analysis, and smart grid control strategy research.  
+% \end{itemize}
 \begin{itemize}
-    \item \textbf{\small Topological Structure Modeling}: The \texttt{edges} array records the connections between power system nodes, providing a clear representation of the grid topology. This facilitates complex network analysis, fault propagation studies, and network optimization.  
-    \item \textbf{\small Time-Series Electrical Characteristics}: The \texttt{H} matrix contains electrical parameters (e.g., voltage, current, power) for each node at different time points, supporting load analysis, power flow calculations, and time-series studies.  
-    \item \textbf{\small Node Function Classification}: Three types of nodes are identified within the dataset:
-    \begin{itemize}
-        \item \textbf{\small PQ Nodes (Load Nodes)}: Nodes with both active power (P) and reactive power (Q) demands, which are essential for studying power distribution and dynamic load variations.  
-        \item \textbf{\small PV Nodes (Generation Nodes)}: Nodes that provide active power output while maintaining a constant voltage, useful for analyzing generator operations and optimization strategies.  
-        \item \textbf{\small Vt Nodes (Voltage-Controlled Nodes)}: Typically representing critical substations or power plants responsible for voltage stability, these nodes are valuable for studying grid regulation and control strategies.  
-    \end{itemize}
-    \item \textbf{\small Time-Series Weather Data Integration}: The dataset incorporates synchronized local weather measurements (e.g., temperature, humidity, wind speed), allowing users to investigate the influence of environmental conditions on grid behavior. This multimodal temporal data supports weather-aware forecasting, renewable integration studies, and climate resilience analysis.
-    \item \textbf{\small Wide Applicability}: The dataset can be used in machine learning, deep learning, optimization algorithm testing, power grid fault prediction, power quality analysis, and smart grid control strategy research.  
+    \item \textbf{Realistic Operational Characteristics:}The data are derived from a real urban power grid in southern China and have real-world operating characteristics. Unlike simulation-generated datasets, they retain the inherent noise, variability, and operating limitations typically encountered in practice.
+    \item \textbf{full-chain, time-series coverage:} It continuously records node-level electrical states (such as active power and reactive power) and the evolving network topology at high temporal resolution. This structure enables holistic modeling of how grid operations dynamically interact with environmental changes, supporting both short-term event detection and long-term behavior analysis.
+    \item \textbf{Weather-Grid Coupling:} The corresponding weather data has been integrated into the dataset. This integration enables researchers to correlate grid operating conditions with various weather patterns for the development and training of machine learning models. Furthermore, by analyzing how grid behavior responds to weather fluctuations, researchers can better understand the interaction between external environmental factors and overall power system performance.
 \end{itemize}
 
-The time-series nature of this dataset makes it suitable for a wide range of research applications,
-including machine learning-based power system forecasting, stability assessment, and anomaly detection.
-Additionally, it serves as a benchmark for optimization and control algorithm testing, contributing to the development of intelligent scheduling methods.
-Unlike traditional static datasets, which typically provide only snapshots of power system states at specific moments, this dataset captures the dynamic evolution of
-the grid, allowing researchers to analyze both long-term trends and short-term fluctuations. The improved temporal resolution enhances its applicability to real-world
-power system analysis.  
+% The time-series nature of this dataset makes it suitable for a wide range of research applications,
+% including machine learning-based power system forecasting, stability assessment, and anomaly detection.
+% Additionally, it serves as a benchmark for optimization and control algorithm testing, contributing to the development of intelligent scheduling methods.
+% Unlike traditional static datasets, which typically provide only snapshots of power system states at specific moments, this dataset captures the dynamic evolution of
+% the grid, allowing researchers to analyze both long-term trends and short-term fluctuations. The improved temporal resolution enhances its applicability to real-world
+% power system analysis.  
 
-Several datasets, such as IEEE test systems and open-source grid models, have been widely used in power system research. 
-However, these datasets primarily focus on steady-state analysis and lack representations of dynamic system behavior. Additionally, 
-while frameworks like MATPOWER provide computational tools for power flow analysis, they do not inherently include real-world time-series data for model validation.
- In contrast, our dataset fills this gap by offering structured time-series data, expanding the possibilities for computational experiments and analytical studies.  
+% Several datasets, such as IEEE test systems and open-source grid models, have been widely used in power system research. 
+% However, these datasets primarily focus on steady-state analysis and lack representations of dynamic system behavior. Additionally, 
+% while frameworks like MATPOWER provide computational tools for power flow analysis, they do not inherently include real-world time-series data for model validation.
+%  In contrast, our dataset fills this gap by offering structured time-series data, expanding the possibilities for computational experiments and analytical studies.  
 
-This dataset holds significant reuse potential across multiple domains:
+% This dataset holds significant reuse potential across multiple domains:
 
-\begin{itemize}
-    \item \textbf{\small Power Grid Stability and Security Analysis}: Supports the assessment of grid operational states and stability under varying load conditions and fault scenarios.  
-    \item \textbf{\small Smart Grid Optimization and Scheduling}: Enables research on real-time grid optimization and scheduling, improving energy efficiency and reducing operational costs.  
-    \item \textbf{\small Data-Driven Predictive Models}: Suitable for training and validating machine learning and deep learning models for tasks such as load forecasting and anomaly detection.  
-    \item \textbf{\small Interdisciplinary Research}: Can be integrated with economic and market factors to study the financial impact of grid anomalies and optimize energy management strategies for economic benefits.  
-\end{itemize}
+% \begin{itemize}
+%     \item \textbf{\small Power Grid Stability and Security Analysis}: Supports the assessment of grid operational states and stability under varying load conditions and fault scenarios.  
+%     \item \textbf{\small Smart Grid Optimization and Scheduling}: Enables research on real-time grid optimization and scheduling, improving energy efficiency and reducing operational costs.  
+%     \item \textbf{\small Data-Driven Predictive Models}: Suitable for training and validating machine learning and deep learning models for tasks such as load forecasting and anomaly detection.  
+%     \item \textbf{\small Interdisciplinary Research}: Can be integrated with economic and market factors to study the financial impact of grid anomalies and optimize energy management strategies for economic benefits.  
+% \end{itemize}
 
-Overall, this dataset provides a comprehensive, high-resolution representation of power system node interactions,
-creating new research opportunities in grid modeling, machine learning applications, and energy system optimization.
-By making this dataset publicly available, we aim to promote reproducible research and accelerate advancements in power system management and analysis.
+Overall,this dataset systematically integrates the grid topology, dynamic operating parameters, and multi-dimensional environmental variables to construct a panoramic data model of the power system with temporal and spatial correlation, providing a high-resolution data base for smart grid research. By making this dataset public, we aim to promote reproducible research and accelerate the advancement of power system management and analysis.
 
 \section*{Methods}
 \subsection*{Data collection}
@@ -89,7 +107,7 @@ To address the issue, we utilize adjacent available data within a window of one 
 This method leverages temporal continuity by using information from proximate timestamps, ensuring that the estimation is based on relevant and recent data. The majority-vote strategy ensures robustness against outliers while the union approach for edges preserves all unique connections. As a result, the completion method provides a reliable and consistent reconstruction of missing data.
 
 % 插入图片：PQ_nodes, PV_nodes, voltage_profile
-\begin{figure}[H]
+\begin{figure}[ht]
     \centering
     \includegraphics[width=0.7\textwidth]{picture/PQ_nodes.png}
     \caption{PQ\_nodes}
@@ -125,6 +143,7 @@ Figure~\ref{fig:Avg_Magnitude} illustrates the variation in the average magnitud
 \label{fig:Avg_Magnitude}
 \end{figure}
 
+\newpage
 \section*{Data Records}
 
 This dataset comprises \textbf{time-series weather data} and \textbf{power grid data}, collected at an \textbf{hourly resolution}. The dataset is structured into two key components:
@@ -180,6 +199,7 @@ The dataset also includes a \textbf{connectivity matrix}, representing the grid 
         \textbf{Q\_load} & Reactive power load at each node (MVAR) \\
         \textbf{P\_gen} & Active power generation at each generator node (MW) \\
         \textbf{Q\_gen} & Reactive power generation at each generator node (MVAR) \\
+        \textbf{Voltage Amplitude} &   \\
         \textbf{Voltage Phase Angle (\(\theta\))} & Voltage phase angle at each node (degrees) \\
         \bottomrule
     \end{tabular}
@@ -190,31 +210,31 @@ The dataset also includes a \textbf{connectivity matrix}, representing the grid 
 These parameters are vital for \textbf{grid stability analysis, load forecasting, and power distribution optimization}.
 
 \subsection*{Data Storage \& Accessibility}
-\begin{itemize}
-    \item \textbf{Frequency}: Data is recorded hourly (\textbf{1-hour intervals}).
-    \item \textbf{File Format}: NPZ (NumPy compressed archive).
-    \item \textbf{File Naming Convention}: \texttt{YYYYMMDD\_HHMM.npz} (e.g., \texttt{20241020\_0000.npz}).
-\end{itemize}
-Each NPZ file contains structured arrays for easy data retrieval:
+% \begin{itemize}
+%     \item \textbf{Frequency}: Data is recorded hourly (\textbf{1-hour intervals}).
+%     \item \textbf{File Format}: NPZ (NumPy compressed archive).
+%     \item \textbf{File Naming Convention}: \texttt{YYYYMMDD\_HHMM.npz} (e.g., \texttt{20241020\_0000.npz}).
+% \end{itemize}
+% Each NPZ file contains structured arrays for easy data retrieval:
 
-\begin{verbatim}
-{
-    "weather": np.array([...]),  # Shape: (N, 6) [hgv, htv, tempPv, windSpeed, windDir]
-    "grid": {
-        "connectivity": np.array([...]),  # Grid adjacency matrix or edge list
-        "node_types": np.array([...]),  # Labels indicating node types
-        "P_load": np.array([...]),  # Active power load
-        "Q_load": np.array([...]),  # Reactive power load
-        "P_gen": np.array([...]),  # Active power generation
-        "Q_gen": np.array([...]),  # Reactive power generation
-        "voltage_angle": np.array([...])  # Voltage phase angle
-    }
-}
-\end{verbatim}
+% \begin{verbatim}
+% {
+%     "weather": np.array([...]),  # Shape: (N, 6) [hgv, htv, tempPv, windSpeed, windDir]
+%     "grid": {
+%         "connectivity": np.array([...]),  # Grid adjacency matrix or edge list
+%         "node_types": np.array([...]),  # Labels indicating node types
+%         "P_load": np.array([...]),  # Active power load
+%         "Q_load": np.array([...]),  # Reactive power load
+%         "P_gen": np.array([...]),  # Active power generation
+%         "Q_gen": np.array([...]),  # Reactive power generation
+%         "voltage_angle": np.array([...])  # Voltage phase angle
+%     }
+% }
+% \end{verbatim}
 
-This dataset is well-suited for research in \textbf{renewable energy integration, power system optimization, and data-driven energy forecasting}.
+% This dataset is well-suited for research in \textbf{renewable energy integration, power system optimization, and data-driven energy forecasting}.
 
-
+\newpage
 \section*{Technical Validation}
 \subsection*{Missing value imputation}
 % 缺失值填补说明
@@ -242,12 +262,10 @@ This dataset is well-suited for research in \textbf{renewable energy integration
 
 For filling missing values in power system H matrices, we compared linear interpolation and cubic spline interpolation methods. As shown in Figure~\ref{fig:interpolation_comparison_en}, linear interpolation (blue line) demonstrated better performance than cubic spline interpolation (red line) on this dataset. The error metrics in Table~\ref{tab:interpolation_errors_en} clearly indicate that linear interpolation outperforms cubic spline interpolation in terms of MSE, RMSE, and MAE, with an MSE value approximately 1/41 of that of cubic spline interpolation. This may be due to the power system data exhibiting more linear temporal characteristics or containing certain noise patterns, which cubic spline interpolation tends to overfit. For this type of power system data, linear interpolation provides more accurate estimation results due to its simplicity and robustness.
 
-\subsection*{Fault value diagnosis}
-% 故障值诊断说明
-
 \subsection*{Correlation analysis}
 % 相关性分析说明
 \subsection*{Load curve}
+
 % 负荷曲线说明
 
 \section*{Usage Notes}
@@ -256,9 +274,8 @@ For filling missing values in power system H matrices, we compared linear interp
 \section*{Acknowledgements}
 % 致谢内容
 
-% 请在此处插入引用，可以采用 BibTeX 或手动添加参考文献。
-\bibliographystyle{unsrt}  % 可选 plain、alpha、abbrv 等格式
-\bibliography{references}  % 请确保有一个名为 references.bib 的 BibTeX 数据库文件
-
-
+% 请在此处插入引用，可以采用 BibTeX 或手动添加参考文献。% 可选 plain、alpha、abbrv 等格式
+\newpage
+\bibliographystyle{plain}
+\bibliography{references}
 \end{document}
